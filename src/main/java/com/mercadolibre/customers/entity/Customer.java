@@ -1,26 +1,34 @@
 package com.mercadolibre.customers.entity;
 
-public class CustomerDTO {
-    private int id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private int quantity;
     private long price;
 
-    public CustomerDTO() {
+    public Customer() {
     }
 
-    public CustomerDTO(int id, String name, int quantity, long price) {
-        this.id = id;
+    public Customer(String name, int quantity, long price) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
