@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import java.util.List;
 
@@ -33,5 +35,20 @@ public class CustomerController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(env);
+    }
+
+    @GetMapping("/ip")
+    public  ResponseEntity<String> getIpAddress() {
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            String ipAddress = localHost.getHostAddress();
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("Dirección IP del servidor:" + ipAddress);
+        } catch (UnknownHostException e){
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
     }
 }
